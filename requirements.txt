@@ -1,0 +1,4 @@
+packaging==26.2
+pypdf==6.12.2
+setuptools==82.0.1
+wheel==0.47.0
