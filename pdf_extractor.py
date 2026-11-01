@@ -6,7 +6,6 @@ Uso: python pdf_extractor.py
 
 import os
 import glob
-import readline
 from pathlib import Path
 # pyrefly: ignore [missing-import]
 from pypdf import PdfReader, PdfWriter
@@ -45,6 +44,11 @@ def path_completer(text, state):
 
 def setup_readline():
     """Configura readline con il nostro completer e i delimitatori corretti."""
+    try:
+        import readline
+    except ImportError:
+        return
+
     readline.set_completer(path_completer)
 
     # I "delimitatori" sono i caratteri che readline usa per capire dove inizia
@@ -61,12 +65,12 @@ def setup_readline():
 # SELEZIONE DEL FILE PDF
 # ─────────────────────────────────────────────
 
-def select_pdf() -> Path:
+def select_pdf() -> tuple[Path, int]:
     """
     Chiede all'utente il path del PDF con supporto Tab-completion.
-    Ritorna un oggetto Path validato (il file esiste ed è un PDF).
+    Ritorna il path validato e il numero di pagine.
     """
-    print("\n📂  Inserisci il path del file PDF (Tab per autocompletare):\n")
+    print("\n📂  Inserisci il path del file PDF (Tab per autocompletare, se supportato):\n")
 
     while True:
         try:
