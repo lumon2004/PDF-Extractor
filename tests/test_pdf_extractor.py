@@ -10,7 +10,7 @@ class ParsePageSelectionTests(unittest.TestCase):
         self.assertEqual(parse_page_selection("1,3-5,4", 5), [0, 2, 3, 4])
 
     def test_rejects_page_outside_document(self):
-        with self.assertRaisesRegex(ValueError, "solo 3 pagine"):
+        with self.assertRaisesRegex(ValueError, "only 3 pages"):
             parse_page_selection("4", 3)
 
 
